@@ -8,7 +8,7 @@ import (
 	apiRunner "api-tests-template/internal/helpers/api-runner"
 )
 
-// HttpGetAdvertisements ищет объявления по подстроке названия.
+// HttpGetAdvertisements выполняет GET-запрос для получения объявления по подстроке названия
 func HttpGetAdvertisements(t *testing.T, token, textForSearch string) *http.Response {
 	t.Helper()
 	return apiRunner.GetRunner().Auth(token).Create().
