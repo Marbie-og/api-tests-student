@@ -26,6 +26,8 @@
 ```
 TEST_LOGIN=your_login
 TEST_PASSWORD=your_password
+FAVORITES_LOGIN=second_login
+FAVORITES_PASSWORD=second_password
 ```
 
 8. Для запуска всех тестов достаточно выполнить команду в корне проекта:
@@ -38,6 +40,12 @@ TEST_PASSWORD=your_password
 
 ```bash
   go test -v ./tests/scenarios/myAdvertisement/
+```
+
+10. Запуск только лабораторной:
+
+```bash
+go test -count=1 -v ./tests/scenarios/advertisementcreate/ ./tests/scenarios/favorites/
 ```
 
 ## Логирование

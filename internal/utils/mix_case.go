@@ -2,7 +2,7 @@ package utils
 
 import "unicode"
 
-// MixCase чередует регистр букв, поддерживая кириллицу; остальные символы сохраняются.
+// MixCase чередует регистр букв
 func MixCase(text string) string {
 	runes := []rune(text)
 	upper := true

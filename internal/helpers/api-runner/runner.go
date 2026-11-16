@@ -6,6 +6,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"time"
 
 	"github.com/steinfletcher/apitest"
 )
@@ -38,12 +39,14 @@ func (at *ApiTest) Auth(token string) *ApiTest {
 }
 
 func (at *ApiTest) Create() *apitest.APITest {
-	apitestNew := apitest.New().EnableNetworking()
+	apitestNew := apitest.New().EnableNetworking(&http.Client{Timeout: 15 * time.Second})
 	if os.Getenv("DEBUG") == "true" {
 		apitestNew = apitestNew.Debug()
 	}
 	return apitestNew.
 		Intercept(func(request *http.Request) {
+			// Ограничиваем частоту запросов к общему учебному стенду.
+			time.Sleep(250 * time.Millisecond)
 			request.Header.Set("User-Agent", at.userAgent)
 
 			if err := mergeServiceUrls(at.host, request.URL); err != nil {
